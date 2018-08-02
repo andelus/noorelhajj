@@ -11,30 +11,28 @@ import {
 	Right,
 	Body,
 	Icon,
-	Text
+	Text,
+	Item,
+	Input,
+	Label,
+	Form
 } from 'native-base';
+import VolunteersService from './volunteers/service';
+import SearchField from './search/';
 export default class MainShell extends Component {
+	getVolunteers() {
+		VolunteersService.getVolunteers();
+		console.log('clicked');
+	}
 	render() {
 		return (
 			<Container>
-				<Header>
-					<Left>
-						<Button transparent>
-							<Icon name="menu" />
-						</Button>
-					</Left>
-					<Body>
-						<Title>Header</Title>
-					</Body>
-					<Right />
-				</Header>
-				<Content>
-					<Text>This is Content Section</Text>
-				</Content>
+				<SearchField />
+				<Container>{this.props.children}</Container>
 				<Footer>
 					<FooterTab>
-						<Button full>
-							<Text>Footer</Text>
+						<Button onPress={this.getVolunteers.bind(this)}>
+							<Text>Find Help</Text>
 						</Button>
 					</FooterTab>
 				</Footer>
