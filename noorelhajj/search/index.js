@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Form, Item, Label, Input } from 'native-base';
+import { Item, Text, Button, Icon, Input, Header, Container, Left } from 'native-base';
 export default class SearchField extends Component {
 	render() {
 		return (
-			<Form>
-				<Item floatingLabel>
-					<Label>Find Doctors, Guides...</Label>
-					<Input />
+			<Header searchBar rounded>
+				<Item>
+					<Input placeholder="Need a doctor, guide, food ..." />
+					<Icon name="ios-search" />
 				</Item>
-			</Form>
+				<Button transparent>
+					<Text>Search</Text>
+				</Button>
+			</Header>
 		);
 	}
 }

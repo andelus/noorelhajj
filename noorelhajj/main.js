@@ -21,7 +21,6 @@ import VolunteersService from './volunteers/service';
 import SearchField from './search/';
 export default class MainShell extends Component {
 	getVolunteers() {
-		VolunteersService.getVolunteers();
 		console.log('clicked');
 	}
 	render() {
@@ -31,8 +30,8 @@ export default class MainShell extends Component {
 				<Container>{this.props.children}</Container>
 				<Footer>
 					<FooterTab>
-						<Button onPress={this.getVolunteers.bind(this)}>
-							<Text>Find Help</Text>
+						<Button onPress={this.getVolunteers.bind(this)} primary>
+							<Text style={{ fontSize: 16, color: '#fff', fontWeight: 'bold' }}>Find Help</Text>
 						</Button>
 					</FooterTab>
 				</Footer>

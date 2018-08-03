@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import { Container, Drawer } from 'native-base';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { View, Container } from 'native-base';
+import SideMenu from 'react-native-side-menu';
 import DrawerMenu from './drawerMenu';
-export default class DrawerContainer extends Component {
-	render() {
-		closeDrawer = () => {
-			this.drawer._root.close();
-		};
-		openDrawer = () => {
-			this.drawer._root.open();
-		};
-		return (
-			<Drawer
-				ref={ref => {
-					this.drawer = ref;
-				}}
-				content={<DrawerMenu navigator={this.navigator} />}
-				onClose={() => this.closeDrawer()}
-			>
-				// Main View
-			</Drawer>
-		);
+const DrawerContainer = WarppedComponenet => {
+	class DrawerContainerHOC extends Component {
+		constructor(props) {
+			super(props);
+			this.state = {
+				isDrawerOpen: false,
+				selectedVolunteer: {}
+			};
+		}
+		openDrawer(data) {
+			this.setState({
+				isDrawerOpen: !this.state.isDrawerOpen,
+				selectedVolunteer: data
+			});
+		}
+		render() {
+			return (
+				<Container>
+					<SideMenu
+						isOpen={this.state.isDrawerOpen}
+						menu={<DrawerMenu volunteer={this.state.selectedVolunteer} />}
+						menuPosition="left"
+					>
+						<WarppedComponenet openDrawer={this.openDrawer.bind(this)} />
+					</SideMenu>
+				</Container>
+			);
+		}
 	}
-}
+	return DrawerContainerHOC;
+};
+
+export default DrawerContainer;

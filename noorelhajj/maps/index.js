@@ -25,6 +25,11 @@ export default class Maps extends Component {
 	state = {
 		volunteers: []
 	};
+	showDetails(volunteer) {
+		console.log('pressed');
+		// console.log(this.props);
+		this.props.openDrawer(volunteer);
+	}
 	componentDidMount() {
 		MapsService.loadVoluntters()
 			.then(res => {
@@ -48,11 +53,13 @@ export default class Maps extends Component {
 						longitudeDelta: 0.0421
 					}}
 				>
-					{this.state.volunteers.map(volunteer => (
+					{this.state.volunteers.map((volunteer, index) => (
 						<Marker
+							key={index}
 							coordinate={{ latitude: volunteer.lat, longitude: volunteer.long }}
 							title={volunteer.name}
 							description={'volunteer1'}
+							onPress={this.showDetails.bind(this, volunteer)}
 						/>
 					))}
 				</MapView>
